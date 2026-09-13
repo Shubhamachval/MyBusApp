@@ -36,11 +36,11 @@ export class Busserive {
   }
 
   getFilteredBusCount(from: string, to: string): number {
-    return this.buses.filter(bus => bus.from === from && bus.to === to).length;
+    return this.buses.filter(bus => bus.from.toUpperCase() === from.toUpperCase() && bus.to.toUpperCase() === to.toUpperCase()).length;
   }
 
   getBusesByFilter(from: string, to: string, page: number = 1, pageSize: number = 9): Bus[] {
-    const filteredBuses = this.buses.filter(bus => bus.from === from && bus.to === to);
+    const filteredBuses = this.buses.filter(bus => bus.from.toUpperCase() === from.toUpperCase() && bus.to.toUpperCase() === to.toUpperCase());
     const startIndex = (page - 1) * pageSize;
     return filteredBuses.slice(startIndex, startIndex + pageSize);
   }
