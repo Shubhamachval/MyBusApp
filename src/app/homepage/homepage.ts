@@ -23,7 +23,8 @@ export class Homepage {
   }
 
   searchButton(): void {
-    console.log('Search button clicked');
+
+    console.log('Search button clicked in feature branch');
     console.log('From:', this.fromValue);
     console.log('To:', this.toValue);
     console.log('Date:', this.dateValue);
