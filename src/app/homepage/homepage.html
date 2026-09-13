@@ -1,0 +1,35 @@
+<div class="homepage-shell">
+  <app-header
+    [title]="'MyBus'"
+    [showLogout]="true"
+    [logoutLabel]="'Logout'"
+    (logoutClicked)="logout()"
+  ></app-header>
+
+  <main class="hero-section">
+    <div class="search-card">
+      <h1>Find your next bus ride</h1>
+
+      <form class="search-form" (ngSubmit)="searchButton()">
+        <div class="field">
+          <label for="from">From</label>
+          <input id="from" type="text" placeholder="City or station" [(ngModel)]="fromValue" name="from" />
+        </div>
+
+        <div class="field">
+          <label for="to">To</label>
+          <input id="to" type="text" placeholder="Destination" [(ngModel)]="toValue" name="to" />
+        </div>
+
+        <div class="field">
+          <label for="date">Date</label>
+          <input id="date" type="date" [(ngModel)]="dateValue" name="date" />
+        </div>
+
+        <button class="search-btn" type="submit">Search</button>
+      </form>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

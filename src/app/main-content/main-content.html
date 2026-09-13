@@ -1,0 +1,43 @@
+<div class="homepage-shell">
+  <app-header
+    [title]="'MyBus'"
+    [showLogout]="true"
+    [logoutLabel]="'Logout'"
+    (logoutClicked)="logout()"
+  ></app-header>
+
+  <main class="content-area">
+    <div class="result-card">
+      <h2>Search Details</h2>
+      <div class="result-row">
+        <div class="result-item"><span>From:</span> {{ fromValue }}</div>
+        <div class="result-item"><span>To:</span> {{ toValue }}</div>
+        <div class="result-item"><span>Date:</span> {{ dateValue }}</div>
+      </div>
+    </div>
+  </main>
+
+  <section class="bus-list-wrapper">
+    <div class="pagination-summary">
+      Showing {{ startItemIndex }}-{{ endItemIndex }} of {{ totalRecords }} buses
+    </div>
+
+    <div class="bus-grid">
+      @for (item of busDetails; track $index) {
+        <app-bus-details [busDetail]="item"></app-bus-details>
+      }
+    </div>
+
+    <div class="pagination-controls">
+      <button type="button" class="page-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()">
+        Previous
+      </button>
+      <span class="page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button type="button" class="page-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()">
+        Next
+      </button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

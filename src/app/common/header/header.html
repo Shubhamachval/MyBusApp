@@ -1,0 +1,16 @@
+<header class="topbar">
+  <div class="brand">{{ title }}</div>
+
+  <nav class="nav-menu" aria-label="Main navigation">
+    <a routerLink="/homepage">Home</a>
+    <a routerLink="/homepage">Bookings</a>
+    <a routerLink="/homepage">Payments</a>
+    <a routerLink="/homepage">Help</a>
+  </nav>
+
+  @if (showLogout) {
+    <button class="logout-btn" type="button" (click)="onLogout()">
+      {{ logoutLabel }}
+    </button>
+  }
+</header>

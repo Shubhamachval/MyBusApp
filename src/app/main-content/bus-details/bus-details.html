@@ -1,0 +1,25 @@
+<div class="bus-card">
+  <div class="bus-header">
+    <h3>{{ busDetail.name }}</h3>
+    <span class="status" [class.available]="busDetail.status === 'Available'" [class.unavailable]="busDetail.status === 'Not Available'">
+      {{ busDetail.status }}
+    </span>
+  </div>
+
+  <div class="bus-grid-fields">
+    <div class="field-box">
+      <label>ID</label>
+      <span>{{ busDetail.id }}</span>
+    </div>
+
+    <div class="field-box">
+      <label>From</label>
+      <span>{{ busDetail.from }}</span>
+    </div>
+
+    <div class="field-box">
+      <label>To</label>
+      <span>{{ busDetail.to }}</span>
+    </div>
+  </div>
+</div>
