@@ -23,7 +23,6 @@ export class Homepage {
   }
 
   searchButton(): void {
-    //get the value of the search input field 
     console.log('Search button clicked');
     console.log('From:', this.fromValue);
     console.log('To:', this.toValue);
