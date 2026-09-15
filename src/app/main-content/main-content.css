@@ -157,9 +157,24 @@
 
 .pagination-summary {
   margin-bottom: 20px;
-  color: #374151;
+  color: #FFFFFF;
   font-weight: 700;
   text-align: right;
+}
+
+.status-message {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #374151;
+  font-weight: 700;
+  text-align: center;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fee2e2;
 }
 
 .bus-grid {
@@ -196,7 +211,7 @@
 
 .page-indicator {
   font-weight: 700;
-  color: #1f2937;
+  color: #ffffff;
 }
 
 .footer {

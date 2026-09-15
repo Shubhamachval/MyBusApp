@@ -7,3 +7,9 @@ export interface Bus {
   to: string;
   status: BusStatus;
 }
+
+export interface Buses {
+    buses: Bus[];
+    totalRecords: number;
+  success?: boolean;
+}

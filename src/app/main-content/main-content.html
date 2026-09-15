@@ -18,25 +18,31 @@
   </main>
 
   <section class="bus-list-wrapper">
-    <div class="pagination-summary">
-      Showing {{ startItemIndex }}-{{ endItemIndex }} of {{ totalRecords }} buses
-    </div>
+    @if ((loading())) {
+      <p class="status-message">Loading buses...</p>
+    } @else if (apiError()) {
+      <p class="status-message error-message">{{ apiError() }}</p>
+    } @else {
+      <div class="pagination-summary">
+        Showing {{ startItemIndex }}-{{ endItemIndex }} of {{ totalRecords }} buses
+      </div>
+        <div class="bus-grid">
+          @for (item of busDetails(); track $index) {
+            <app-bus-details [busDetail]="item"></app-bus-details>
+          }
+        </div>
+     
 
-    <div class="bus-grid">
-      @for (item of busDetails; track $index) {
-        <app-bus-details [busDetail]="item"></app-bus-details>
-      }
-    </div>
-
-    <div class="pagination-controls">
-      <button type="button" class="page-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()">
-        Previous
-      </button>
-      <span class="page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
-      <button type="button" class="page-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()">
-        Next
-      </button>
-    </div>
+      <div class="pagination-controls">
+        <button type="button" class="page-btn" [disabled]="currentPage === 1" (click)="goToPreviousPage()">
+          Previous
+        </button>
+        <span class="page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
+        <button type="button" class="page-btn" [disabled]="currentPage === totalPages" (click)="goToNextPage()">
+          Next
+        </button>
+      </div>
+    }
   </section>
 
   <app-footer></app-footer>

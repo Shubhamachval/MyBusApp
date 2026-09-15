@@ -1,13 +1,34 @@
 <div class="login-page">
-  <form class="login-card" (ngSubmit)="onSubmit()">
+  <form class="login-card" (ngSubmit)="onSubmit()" novalidate>
     <h1>Login</h1>
 
     <label for="email">Email</label>
-    <input id="email" type="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required />
+    <input
+      id="email"
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Enter your email"
+      required
+      email
+      [class.invalid]="email && !emailValid"
+    />
+    <small class="error" *ngIf="email && !emailValid">Enter a valid email address.</small>
 
     <label for="password">Password</label>
-    <input id="password" type="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required />
+    <input
+      id="password"
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Enter your password"
+      required
+      [class.invalid]="password && !passwordValid"
+    />
+    <small class="error" *ngIf="password && !passwordValid">
+      Password must be at least 8 characters, with 1 uppercase, 1 number, and 1 special character.
+    </small>
 
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="!isFormValid()">Submit</button>
   </form>
 </div>

@@ -10,23 +10,60 @@
     <div class="search-card">
       <h1>Find your next bus ride</h1>
 
-      <form class="search-form" (ngSubmit)="searchButton()">
+      <form class="search-form" (ngSubmit)="searchButton()" novalidate>
         <div class="field">
           <label for="from">From</label>
-          <input id="from" type="text" placeholder="City or station" [(ngModel)]="fromValue" name="from" />
+          <input
+            id="from"
+            type="text"
+            placeholder="City or station"
+            [(ngModel)]="fromValue"
+            name="from"
+            appUppercaseText
+            required
+            [pattern]="cityPattern"
+            #fromModel="ngModel"
+          />
+          <small class="validation-message" *ngIf="fromModel.invalid && (fromModel.dirty || fromModel.touched)">
+            From is required and must contain only letters.
+          </small>
         </div>
 
         <div class="field">
           <label for="to">To</label>
-          <input id="to" type="text" placeholder="Destination" [(ngModel)]="toValue" name="to" />
+          <input
+            id="to"
+            type="text"
+            placeholder="Destination"
+            [(ngModel)]="toValue"
+            name="to"
+            appUppercaseText
+            required
+            [pattern]="cityPattern"
+            #toModel="ngModel"
+          />
+          <small class="validation-message" *ngIf="toModel.invalid && (toModel.dirty || toModel.touched)">
+            To is required and must contain only letters.
+          </small>
         </div>
 
         <div class="field">
           <label for="date">Date</label>
-          <input id="date" type="date" [(ngModel)]="dateValue" name="date" />
+          <input
+            id="date"
+            type="date"
+            [(ngModel)]="dateValue"
+            name="date"
+            required
+            [min]="minDate"
+            #dateModel="ngModel"
+          />
+          <small class="validation-message" *ngIf="dateModel.invalid && (dateModel.dirty || dateModel.touched)">
+            Please select a valid future date.
+          </small>
         </div>
 
-        <button class="search-btn" type="submit">Search</button>
+        <button class="search-btn" type="submit" [disabled]="!fromValue || !toValue || !dateValue">Search</button>
       </form>
     </div>
   </main>

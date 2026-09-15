@@ -106,6 +106,15 @@
   cursor: pointer;
 }
 
+.validation-message {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 600;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
