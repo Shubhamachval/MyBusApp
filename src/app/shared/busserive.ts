@@ -1,47 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Bus } from './Bus';
+import { Observable, map } from 'rxjs';
+import { Bus, Buses } from './Bus';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class Busserive {
-  private buses: Bus[] = Array.from({ length: 500 }, (_, index) => {
-    const routes = [
-      { from: 'Delhi', to: 'Jaipur' },
-      { from: 'Delhi', to: 'Agra' },
-      { from: 'Jaipur', to: 'Udaipur' },
-      { from: 'Lucknow', to: 'Kanpur' },
-      { from: 'Mumbai', to: 'Pune' },
-      { from: 'Bengaluru', to: 'Chennai' },
-      { from: 'Hyderabad', to: 'Vijayawada' },
-      { from: 'Ahmedabad', to: 'Surat' },
-      { from: 'Kolkata', to: 'Durgapur' },
-      { from: 'Patna', to: 'Gaya' }
-    ];
+  private readonly apiUrl = 'http://localhost:8080/mybuses';
 
-    const route = routes[index % routes.length];
-    const status: Bus['status'] = index % 3 === 0 ? 'Not Available' : 'Available';
+  constructor(private http: HttpClient) {}
 
-    return {
-      id: 100 + index + 1,
-      name: `Bus ${index + 1}`,
-      from: route.from,
-      to: route.to,
-      status
-    };
-  });
-
-  getBuses(): Bus[] {
-    return this.buses;
+  getBuses(from: string, to: string, page: number, pageSize: number): Observable<Buses> {
+    return this.http
+      .get<Buses>(this.apiUrl + `?from=${from}&to=${to}&page=${page}&size=${pageSize}`, { observe: 'response' })
+      .pipe(
+        map((response) => ({
+          ...(response.body ?? { buses: [], totalRecords: 0 }),
+          success: response.headers.get('success') === 'true',
+        }))
+      );
   }
 
-  getFilteredBusCount(from: string, to: string): number {
-    return this.buses.filter(bus => bus.from.toUpperCase() === from.toUpperCase() && bus.to.toUpperCase() === to.toUpperCase()).length;
-  }
-
-  getBusesByFilter(from: string, to: string, page: number = 1, pageSize: number = 9): Bus[] {
-    const filteredBuses = this.buses.filter(bus => bus.from.toUpperCase() === from.toUpperCase() && bus.to.toUpperCase() === to.toUpperCase());
-    const startIndex = (page - 1) * pageSize;
-    return filteredBuses.slice(startIndex, startIndex + pageSize);
+  getBusesByFilter(from: string, to: string, page: number, pageSize: number): Observable<Buses> {
+    return this.getBuses(from, to, page, pageSize);
   }
 }

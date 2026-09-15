@@ -162,6 +162,21 @@
   text-align: right;
 }
 
+.status-message {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #374151;
+  font-weight: 700;
+  text-align: center;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
 .bus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
